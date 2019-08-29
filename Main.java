@@ -9,6 +9,7 @@ public class Main {
         Game Game1 = new Game(Integer.parseInt(nbPlayer));
         while(Game1.getNbRound()<13){
             Game1.nextRound();
+            //Game1.RollTheDices();
 
         }
     }

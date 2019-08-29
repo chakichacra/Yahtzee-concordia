@@ -4,6 +4,10 @@ public class Dice {
     int score;
     boolean keep;
 
+    public Dice(int score) {
+        this.score = score;
+    }
+
     public void reroll(){
         if(!this.keep) {
             Random rand = new Random();
@@ -19,4 +23,11 @@ public class Dice {
         }
     }
 
+    public void keepTo0(){
+        keep = false;
+    }
+
+    public int getScore() {
+        return score;
+    }
 }
