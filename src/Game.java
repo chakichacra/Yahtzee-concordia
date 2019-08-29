@@ -10,13 +10,11 @@ public class Game {
         ScoreSheets = new ScoreSheet[nbPlayer];
         String name; //Pour stocker le no; de chacun des joueurs
         nbRound = 0; //initialise le numero du round a zero
-        int countPlayer = 1;
-        for (ScoreSheet SS:ScoreSheets) {  //je cree un scoresheet par nb de joueur
-            System.out.println("The name of player "+countPlayer+" : ");// Whrite he's name
-            countPlayer ++; //je passe au joueur suivant
+        for (int i = 0; i < nbPlayer; i++) {  //je cree un scoresheet par nb de joueur
+            System.out.println("The name of player "+i+1+" : ");// Whrite he's name
             name = myObj.nextLine();
-            SS = new ScoreSheet(name);
-            System.out.println("ScoreSheet for "+ SS.getPlayerName()+ " created");
+            ScoreSheets[i] = new ScoreSheet(name);
+            System.out.println("ScoreSheet for "+ ScoreSheets[i].getPlayerName()+ " created");
         }
         theDiceBundle.resetTheDices();
     }

@@ -7,10 +7,10 @@ public class Main {
         System.out.println("Number of player(s) : ");
         String nbPlayer = input.nextLine(); //J'attends la reponse utilisateur
         Game Game1 = new Game(Integer.parseInt(nbPlayer)); //Je cree la partie avec le nb de joueur saisie
+        System.out.println(Game1.ScoreSheets[0].getPlayerName());
         while(Game1.getNbRound()<13){
             Game1.nextRound();
             Game1.RollTheDices();
-
         }
     }
 }
