@@ -48,6 +48,7 @@ public class ScoreSheet {
     }
 
     void View(){
+        System.out.println(" --- Affichage de la Score Sheet --- \n\n\n\n\n\n --- Affichage de la Score Sheet ---");
         //Simon Tancev
     }
 
