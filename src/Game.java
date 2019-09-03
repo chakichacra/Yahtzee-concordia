@@ -37,7 +37,7 @@ public class Game {
                 nbLance ++;
                 theDiceBundle.Throw();
                 while (!answer.equals("stop") && !answer.equals("y")) {
-                    ScoreSheets[i].View();
+                    ScoreSheets[i].View(ScoreSheets);
                     theDiceBundle.printTheDices();
                     System.out.printf("Throw n°%d, dice(s) to keep/reroll ? (ex : '2,4,5' or 'stop' to stop here) : \n", nbLance);
                     if (nbLance < 3) {
@@ -48,7 +48,7 @@ public class Game {
                         if (!theDiceBundle.switchDices(answer)) {
                             System.out.printf("Erreur de saisie, veuillez recommencer\n");
                         } else {
-                            ScoreSheets[i].View();
+                            ScoreSheets[i].View(ScoreSheets);
                             theDiceBundle.printTheDices();
                             System.out.printf("Confirm to roll the dices [y/n] : \n");
                             answer = input.nextLine();
@@ -60,7 +60,7 @@ public class Game {
                 }
 
             }
-            ScoreSheets[i].View();
+            ScoreSheets[i].View(ScoreSheets);
             theDiceBundle.resetTheDicesKeep();
             theDiceBundle.order();
             theDiceBundle.printTheDices();
@@ -68,7 +68,7 @@ public class Game {
             answer = input.nextLine();
             while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle,Integer.parseInt(answer))){
                 System.out.printf("This case is already completed\n");
-                ScoreSheets[i].View();
+                ScoreSheets[i].View(ScoreSheets);
                 theDiceBundle.printTheDices();
                 answer = input.nextLine();
             };

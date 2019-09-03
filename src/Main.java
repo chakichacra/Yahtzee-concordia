@@ -11,7 +11,6 @@ public class Main {
             nbPlayer = input.nextLine();
         }
         Game Game1 = new Game(Integer.parseInt(nbPlayer)); //Je cree la partie avec le nb de joueur saisie
-        System.out.println(Game1.ScoreSheets[0].getPlayerName());
         Game1.start();
     }
 }

@@ -93,7 +93,7 @@ public class DiceBundle {
         return false;
     }
 
-    public boolean thereIsASmallStraight(){
+    public boolean thereIsASmallStraight(){ //bug voir avec simon pour le dice ++ ultra instinct
         for (int i=0;i<3;i++) {
             if (this.Dices[i].score == this.Dices[i + 1].score && this.Dices[i + 1].score == this.Dices[i + 2].score) {
                 return true;
