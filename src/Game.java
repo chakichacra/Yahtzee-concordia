@@ -13,8 +13,7 @@ public class Game {
         for (int i = 1; i <= nbPlayer; i++) {  //je cree un scoresheet par nb de joueur
             System.out.println("The name of player " + i + " : ");// Whrite he's name
             name = myObj.nextLine();
-            ScoreSheets[i - 1] = new ScoreSheet(name);
-            System.out.println("ScoreSheet for " + ScoreSheets[i - 1].getPlayerName() + " created");
+            ScoreSheets[i - 1] = new ScoreSheet(name); //score sheet (player 1 at place [0])
         }
         theDiceBundle.resetTheDices();
     }
@@ -63,9 +62,16 @@ public class Game {
             }
             ScoreSheets[i].View();
             theDiceBundle.resetTheDicesKeep();
+            theDiceBundle.order();
             theDiceBundle.printTheDices();
             System.out.printf("Which case would you like to put those dices ? (ex : '7' for Three of a Kind) :\n");
             answer = input.nextLine();
+            while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle,Integer.parseInt(answer))){
+                System.out.printf("This case is already completed\n");
+                ScoreSheets[i].View();
+                theDiceBundle.printTheDices();
+                answer = input.nextLine();
+            };
         }
     }
 
