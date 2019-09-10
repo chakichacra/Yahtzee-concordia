@@ -1,0 +1,27 @@
+			Repartition of tasks
+Theotime: 
+	Write the logic of the game and the core function like rolling the Dice.
+
+Simon:
+	Make the function that check the input of the users and make sure that they
+	don't try to fuck around with some strange input.
+
+Theo:
+	Write the diplay functions and the utility function.
+
+			Features that we want to add
+
+It would be nice to dramatically improve the display of the score and the design of evrything in general.
+From a user point of view the design and what he sees might be the most important thing.
+First it would be nice to have a real scorebord with real border that will be generated dynamically.
+Same for the Dices would be much more user friendly to have a display of the Dice that look like this:
+		-----
+		| 4 |
+		-----
+
+Then we should implent a menu where you can start the game and change the parameter. For this we need
+first to rewrite some part of the code to make it more flexible, using variable and constant to define 
+things like the number of Dice, the number of round, ect.
+
+And then finally the user input should be perfectly secured. So we will need to have a bunch of function
+to check every input.
