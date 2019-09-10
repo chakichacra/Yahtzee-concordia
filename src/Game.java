@@ -34,7 +34,7 @@ public class Game {
             Scanner input = new Scanner(System.in);
             while (nbLance < 3) { //3 throws (or less if the user choose 'stop'
                 answer = "default";
-                nbLance ++;
+                nbLance++;
                 theDiceBundle.Throw();
                 while (!answer.equals("stop") && !answer.equals("y")) {
                     ScoreSheets[i].View();
@@ -53,25 +53,28 @@ public class Game {
                             System.out.printf("Confirm to roll the dices [y/n] : \n");
                             answer = input.nextLine();
                         }
-                    }
-                    else{ //if the user wrote 'stop' I force the nb to 3 to stop the game (a little ugly but it works)
+                    } else { //if the user wrote 'stop' I force the nb to 3 to stop the game (a little ugly but it works)
                         nbLance = 3;
                     }
                 }
 
             }
-            ScoreSheets[i].View(); //And of the round, the user choose where to put hes dices
-            theDiceBundle.resetTheDicesKeep();
-            theDiceBundle.order();
-            theDiceBundle.printTheDices();
-            System.out.printf("Which case would you like to put those dices ? (ex : '7' for Three of a Kind) :\n");
-            answer = input.nextLine();
-            while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle,Integer.parseInt(answer))){ //check if they're already smthg in that case
+            do {
+                ScoreSheets[i].View(); //And of the round, the user choose where to put hes dices
+                theDiceBundle.resetTheDicesKeep();
+                theDiceBundle.order();
+                theDiceBundle.printTheDices();
+                System.out.printf("Which case would you like to put those dices ? (ex : '7' for Three of a Kind) :\n");
+                answer = input.nextLine();
+            }
+            while (!answer.matches("-?\\d+(\\.\\d+)?")); //Check if the case is a number (however it can be out of range... maybe fix later, idk)
+            while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle, Integer.parseInt(answer))) { //check if they're already smthg in that case
                 System.out.printf("This case is already completed\n");
                 ScoreSheets[i].View();
                 theDiceBundle.printTheDices();
                 answer = input.nextLine();
-            };
+            }
+            ;
         }
     }
 

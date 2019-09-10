@@ -1,5 +1,5 @@
 public class ScoreSheet {
-    
+
     String playerName;
     int nbCase =15;
     int[] cases;
