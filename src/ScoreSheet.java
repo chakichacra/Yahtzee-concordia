@@ -6,7 +6,8 @@ public class ScoreSheet {
 
     public ScoreSheet(String playerName) {
         this.playerName = playerName;
-        cases = new int[]{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,};
+        cases = new int[]{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,}; //I initialize at -1 because I need to distinguished the score 'null' and the score '0'
+                                                                          // '-1' mean the case is empty and '0' mean the case is played with a score of 0
     }
 
     public String getPlayerName() {
@@ -40,10 +41,9 @@ public class ScoreSheet {
             System.out.printf("\n");
         }
         System.out.printf("%22d : %11s : %2s\n",13,"Yahtzee", this.scoreNull(13));
-        //Simon Tancev
     }
 
-    String scoreNull(int numCase){
+    String scoreNull(int numCase){ //check if the score is null so he can play here
         if (cases[numCase] == -1) return ".";
         return String.valueOf(cases[numCase]); //probleme
     }
@@ -121,8 +121,6 @@ public class ScoreSheet {
                     this.cases[13] = 0;
                 break;
 
-            default:
-                // code block
         }
         return true;
     }

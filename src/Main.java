@@ -10,7 +10,7 @@ public class Main {
         while (!nbPlayer.matches("-?\\d+(\\.\\d+)?") || Integer.parseInt(nbPlayer)>6 || Integer.parseInt(nbPlayer)<0){
             nbPlayer = input.nextLine();
         }
-        Game Game1 = new Game(Integer.parseInt(nbPlayer)); //Je cree la partie avec le nb de joueur saisie
+        Game Game1 = new Game(Integer.parseInt(nbPlayer)); //I create the game with the number of player choosed by the user (max 6)
         System.out.println(Game1.ScoreSheets[0].getPlayerName());
         Game1.start();
     }
