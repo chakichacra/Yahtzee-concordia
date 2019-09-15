@@ -43,7 +43,7 @@ public class Game {
                     if (nbLance < 3) { // A little check never killed anyone
                         answer = input.nextLine();
                     } else
-                        answer = "stop"; //I force the user to stop if its the case
+                        answer = "stop"; //I force the user to stop if its the case (should never happen)
                     if (!answer.equals("stop")) {
                         if (!theDiceBundle.switchDices(answer)) { //false if the input doesn't mean anything
                             System.out.printf("Erreur de saisie, veuillez recommencer\n");

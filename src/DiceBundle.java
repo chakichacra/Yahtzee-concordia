@@ -44,7 +44,13 @@ public class DiceBundle {
     }
 
     public boolean switchDices(String numOfDices) {  //swith all the dices in the string (ex : '3,4,5')
-            String[] parts = numOfDices.split(",");  //split the string
+        String[] parts;
+        if (numOfDices.isBlank()){
+                parts = new  String[] {"1","1"};  //if the user choose to send nothing, we just reroll the dices.
+            }
+            else {
+                parts = numOfDices.split(",");  //split the string
+            }
             for (int i = 0; i < parts.length; i++) {
                 //System.out.println("The dice : "+parts[i]);
                 if (!parts[i].matches("-?\\d+(\\.\\d+)?")) { //check if there is no mistake
@@ -58,7 +64,6 @@ public class DiceBundle {
                 this.Dices[Integer.parseInt(parts[i]) - 1].switchKeep();
             }
             return true; //no problem, return true
-
     }
 
     public void order(){ //order the dices at the last throw or when the user stop manually
@@ -95,13 +100,27 @@ public class DiceBundle {
         return false;
     }
 
-    public boolean thereIsASmallStraight(){ //Check if there is a small Straight
-        for (int i=0;i<3;i++) {
-            if (this.Dices[i].score == this.Dices[i + 1].score && this.Dices[i + 1].score == this.Dices[i + 2].score) {
-                return true;
+    public boolean thereIsASmallStraight(){ //Check if there is a small Straight. A bit hard to understand but it works
+        //System.out.println("Doing a small straight");
+        for (int i=0;i<2;i++) { //starting from the 1st or 2nd dice
+            if (this.Dices[i].score==Dices[i+1].score) { // 2 firsts dices are the same
+                //System.out.println("1");
+                if (this.Dices[i].score==Dices[i+2].score-1 && this.Dices[i+2].score==Dices[i+3].score-1) {
+                    return true;
+                }
+            }else if (this.Dices[i+1].score==Dices[i+2].score){// 2nd and 3rd dices are the same
+                //System.out.println("2");
+                if (this.Dices[i].score==Dices[i+1].score-1 && this.Dices[i+1].score==Dices[i+3].score-1) {
+                    return true;
+                }
+            }else if (this.Dices[i+2].score==Dices[i+3].score){//3rd and 4th dices are the same
+                //System.out.println("3");
+                if (this.Dices[i].score==Dices[i+1].score-1 && this.Dices[i+1].score==Dices[i+2].score-1) {
+                    return true;
+                }
             }
         }
-        return false;
+        return false; //not a small straight :(
     }
 
     public boolean thereIsALargeStraight(){//Check if there is a large Straight
@@ -127,4 +146,11 @@ public class DiceBundle {
         return true;
     }
 
+    public int sumOfDices(){
+        int sum = 0;
+        for (int i = 0; i < this.Dices.length;i++){
+            sum += this.Dices[i].score;
+        }
+    return sum;
+    }
 }

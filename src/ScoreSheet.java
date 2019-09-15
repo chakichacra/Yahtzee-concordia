@@ -114,7 +114,7 @@ public class ScoreSheet {
                 }else
                     this.cases[12] = 0;
                 break;
-            case 13://Yahtzee / Yam
+            case 13://Yahtzee / Yam case
                 if (theDiceBundle.thereIsAYahtzee()) {
                     this.cases[13] = 50;
                 }else
