@@ -22,6 +22,10 @@ public class Game {
         while (nbRound < 13) {
             nextRound();
         }
+        for (int player = 0; player < ScoreSheets.length; player++){
+            int total = ScoreSheets[player].cases[7]+ScoreSheets[player].cases[8]+ScoreSheets[player].cases[16];
+            System.out.printf("Score du joueur : "+ ScoreSheets[player].getPlayerName() +" is " + total); //Print the number of the round
+        }
     }
 
     public void nextRound() {
@@ -68,13 +72,16 @@ public class Game {
                 answer = input.nextLine();
             }
             while (!answer.matches("-?\\d+(\\.\\d+)?")); //Check if the case is a number (however it can be out of range... maybe fix later, idk)
-            while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle, Integer.parseInt(answer))) { //check if they're already smthg in that case
+            int answerInt = Integer.parseInt(answer);
+            //if(answerInt < 14 && answerInt > 6)
+            //    answerInt += 2;
+            while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle, answerInt)) { //check if they're already smthg in that case
                 System.out.printf("This case is already completed\n");
                 ScoreSheets[i].View();
                 theDiceBundle.printTheDices();
-                answer = input.nextLine();
+                answerInt = Integer.parseInt(input.nextLine());
             }
-            ;
+
         }
     }
 

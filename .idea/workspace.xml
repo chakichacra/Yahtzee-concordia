@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="83e3065e-ee12-4cdf-93f7-67b74f1414fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test@/DiceBundle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/DiceBundle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiceBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiceBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/test@/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/test@/ScoreSheet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/ScoreSheet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ScoreSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScoreSheet.java" afterDir="false" />
     </list>
