@@ -48,7 +48,7 @@ public class ScoreSheet {
                     System.out.printf("%15d : %11s : %2s", 13, "Yahtzee", this.scoreNull(i+8));
                     break;
                 case 8 ://Total
-                    System.out.printf("%15d : %11s : %2s", i+6, "Total", this.scoreNull(i+8));
+                    System.out.printf("%29s : %2s", "Total", this.scoreNull(i+8));
                     break;
             }
             System.out.printf("\n");

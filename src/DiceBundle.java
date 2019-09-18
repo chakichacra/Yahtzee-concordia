@@ -43,7 +43,7 @@ public class DiceBundle {
         }
     }
 
-    public boolean switchDices(String numOfDices) {  //swith all the dices in the string (ex : '3,4,5')
+    public void switchDices(String numOfDices) {  //swith all the dices in the string (ex : '3,4,5')
         String[] parts;
         if (numOfDices.isBlank()){
                 parts = new  String[] {"1","1"};  //if the user choose to send nothing, we just reroll the dices.
@@ -51,19 +51,9 @@ public class DiceBundle {
             else {
                 parts = numOfDices.split(",");  //split the string
             }
-            for (int i = 0; i < parts.length; i++) {
-                //System.out.println("The dice : "+parts[i]);
-                if (!parts[i].matches("-?\\d+(\\.\\d+)?")) { //check if there is no mistake
-                    return false; //if mistake return null
-                }
-                if (Integer.parseInt(parts[i]) < 1 || Integer.parseInt(parts[i]) > 5) {
-                    return false; //if Dice not in range, return null
-                }
-            }
-            for (int i = 0; i < parts.length; i++) { //2nd for afer the checks, the dices bool 'keep' are switching here
+            for (int i = 0; i < parts.length; i++) { //2nd for after the checks, the dices bool 'keep' are switching here
                 this.Dices[Integer.parseInt(parts[i]) - 1].switchKeep();
             }
-            return true; //no problem, return true
     }
 
     public void order(){ //order the dices at the last throw or when the user stop manually
