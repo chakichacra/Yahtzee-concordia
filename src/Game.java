@@ -18,7 +18,7 @@ public class Game {
             name = myObj.nextLine();
             ScoreSheets[i - 1] = new ScoreSheet(name); //score sheet (player 1 at place [0])
         }
-        theDiceBundle.resetTheDices();
+        theDiceBundle.resetTheDices();:
     }
 
     public void start() {
