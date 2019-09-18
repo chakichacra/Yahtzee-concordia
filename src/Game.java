@@ -1,5 +1,6 @@
 import java.lang.reflect.AccessibleObject;
 import java.util.Scanner;
+import java.io.File;
 
 public class Game {
     ScoreSheet[] ScoreSheets;
@@ -419,4 +420,25 @@ public class Game {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////  END OF DISPLAY  /////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void registerScoreBoard() {
+        File scoreSave = new File("Save.txt");
+        int cpt;
+        int size;
+
+        if (scoreSave.createNewFile())
+            System.out.println("Save file created!");
+        scoreSave.setWritable(true);
+
+        size = this.calculateSize();
+        this.displayBorder(size, );
+        this.displayFirstLine();
+        this.displayBorder(size);
+        cpt = 1;
+        while (cpt <= 16) {
+            this.displayLine(cpt);
+            this.displayBorder(size);
+            ++cpt;
+        }
+    }
 }
