@@ -17,7 +17,6 @@ public class Game {
             ScoreSheets[i - 1] = new ScoreSheet(name); //score sheet (player 1 at place [0])
         }
         theDiceBundle.resetTheDices();
-        this.displayScoreBoard();
     }
 
     public void start() {
@@ -43,12 +42,12 @@ public class Game {
                 nbLance++;
                 theDiceBundle.Throw();
                 while (!answer.equals("stop") && !answer.equals("y")) {
-                    ScoreSheets[i].View();
+                    this.displayScoreBoard();
                     theDiceBundle.printTheDices();
                     System.out.printf("Throw n°%d, dice(s) to keep/reroll ? (ex : '2,4,5' or '' to stay the same or even 'stop' to stop here) : \n", nbLance);
                     answer = input.nextLine();
                     while (!isDiceSensitive(answer)) {
-                        ScoreSheets[i].View();
+                        this.displayScoreBoard();
                         theDiceBundle.printTheDices();
                         System.out.printf("you gotta say the dices you want to keep/reroll like that : '2,4,5' or even nothing to reroll the same way it is right now or 'stop' to stop \n");
                         answer = input.nextLine();
@@ -56,12 +55,12 @@ public class Game {
                     if (!answer.equals("stop")) { //false if the input doesn't mean anything
                         System.out.printf("Erreur de saisie, veuillez recommencer\n");
                         theDiceBundle.switchDices(answer);
-                        ScoreSheets[i].View(); //Print the score Sheet
+                        this.displayScoreBoard(); //Print the score Sheet
                         theDiceBundle.printTheDices(); //Print the dices
                         System.out.printf("Confirm to roll the dices [y/n] : \n");
                         answer = input.nextLine();
                         while (!isYorN(answer)) {
-                            ScoreSheets[i].View();
+                            this.displayScoreBoard();
                             theDiceBundle.printTheDices();
                             System.out.printf("Please write 'y' for yes or 'n' for no ... : \n");
                             answer = input.nextLine();
@@ -73,7 +72,7 @@ public class Game {
                 }
 
             }
-            ScoreSheets[i].View(); //And of the round, the user choose where to put hes dices
+            this.displayScoreBoard(); //And of the round, the user choose where to put hes dices
             theDiceBundle.resetTheDicesKeep();
             theDiceBundle.order();
             theDiceBundle.printTheDices();
@@ -81,7 +80,7 @@ public class Game {
             answer = input.nextLine();
 
             while (!isACorrectCaseNumber(answer)) {
-                ScoreSheets[i].View();
+                this.displayScoreBoard();
                 theDiceBundle.printTheDices();
                 System.out.printf("The cases are numbers from 1 to 6 and from 7 to 13, look above for their significations :\n");
                 answer = input.nextLine();
@@ -92,12 +91,12 @@ public class Game {
             //if(answerInt < 14 && answerInt > 6)
             //    answerInt += 2;
             while (!ScoreSheets[i].putScoreAtPlace(theDiceBundle, answerInt)) { //check if they're already smthg in that case
-                ScoreSheets[i].View();
+                this.displayScoreBoard();
                 theDiceBundle.printTheDices();
                 System.out.printf("This case is already completed\n");
                 answer = input.nextLine();
                 while (!isACorrectCaseNumber(answer)) {
-                    ScoreSheets[i].View();
+                    this.displayScoreBoard();
                     theDiceBundle.printTheDices();
                     System.out.printf("We can do it the easy way or we can do it the hard way ... :\n");
                     answer = input.nextLine();
@@ -228,7 +227,9 @@ public class Game {
 
         cpt = 0;
         nbOfPlayer = this.ScoreSheets.length;
-        System.out.print("\t");
+        System.out.print(num
+                            + "-"
+                            + "\t");
         switch (num)
         {
             case 1:
@@ -299,13 +300,13 @@ public class Game {
                 break;
             case 12:
                 System.out.print("|"
-                        + "SMALL_STRAIGHT"
+                        + "SMALL STRAIGHT"
                         + " |");
                 this.displayLineEnd(12);
                 break;
             case 13:
                 System.out.print("|"
-                        + "LARGE_STRAIGHT"
+                        + "LARGE STRAIGHT"
                         + " |");
                 this.displayLineEnd(13);
                 break;
