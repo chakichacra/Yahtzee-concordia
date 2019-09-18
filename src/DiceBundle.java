@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class DiceBundle {
     Dice[] Dices = new Dice[5];    //declaring array of dice
     int nbThrow;
@@ -143,4 +145,32 @@ public class DiceBundle {
         }
     return sum;
     }
+
+    public void forceTheDices(){
+        Scanner input = new Scanner(System.in);
+        String answer;
+        for (int i = 0; i < Dices.length; i++) {
+            System.out.println("The value of the dice "+(i+1)+" :");
+            answer = input.nextLine();
+            while (!isADiceNumber(answer)){
+                System.out.println("A number between 1 and 6 please :");
+                answer = input.nextLine();
+            }
+            Dices[i].score = Integer.parseInt(answer);
+            Dices[i].keepTo0();
+        }
+    }
+
+    public boolean isADiceNumber(String num){
+        try {
+            if (Integer.parseInt(num) > 0 && Integer.parseInt(num) < 7) {
+                return true;
+            } else {
+                return false;//Every other number is false
+            }
+        } catch (Exception e) {
+            return false; //In case this is not the type required
+        }
+    }
+
 }

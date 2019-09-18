@@ -44,7 +44,7 @@ public class Game {
                 while (!answer.equals("stop") && !answer.equals("y")) {
                     this.displayScoreBoard();
                     theDiceBundle.printTheDices();
-                    System.out.printf("Throw n°%d, dice(s) to keep/reroll ? (ex : '2,4,5' or '' to stay the same or even 'stop' to stop here) : \n", nbLance);
+                    System.out.printf("Throw n°%d, dice(s) to keep/reroll ? (ex : '2,4,5' or '' to stay the same or even 'stop' to stop here), there's also an admin command if you want to test : \n", nbLance);
                     answer = input.nextLine();
                     while (!isDiceSensitive(answer)) {
                         this.displayScoreBoard();
@@ -53,18 +53,37 @@ public class Game {
                         answer = input.nextLine();
                     }
                     if (!answer.equals("stop")) { //false if the input doesn't mean anything
-                        System.out.printf("Erreur de saisie, veuillez recommencer\n");
-                        theDiceBundle.switchDices(answer);
-                        this.displayScoreBoard(); //Print the score Sheet
-                        theDiceBundle.printTheDices(); //Print the dices
-                        System.out.printf("Confirm to roll the dices [y/n] : \n");
-                        answer = input.nextLine();
-                        while (!isYorN(answer)) {
-                            this.displayScoreBoard();
-                            theDiceBundle.printTheDices();
-                            System.out.printf("Please write 'y' for yes or 'n' for no ... : \n");
+                        if (answer.equals("admin")) {
+                            System.out.printf("Write 'd' to edit the dices, 'c' to edit a case or 'end' to finish the game : \n");
+                            while (!isAdminSensitive(answer)) {
+                                this.displayScoreBoard();
+                                theDiceBundle.printTheDices();
+                                System.out.printf("Write 'd' to edit the dices, 'c' to edit the cases or 'end' to finish the game : \n");
+                                answer = input.nextLine();
+                            }
+                            switch (answer) {
+                                case "d":
+                                    theDiceBundle.forceTheDices();
+                                    break;
+                                case "c":
+                                    break;
+                                case "end":
+                                    break;
+                            }
+                        } else {
+                            System.out.printf("Erreur de saisie, veuillez recommencer\n");
+                            theDiceBundle.switchDices(answer);
+                            this.displayScoreBoard(); //Print the score Sheet
+                            theDiceBundle.printTheDices(); //Print the dices
+                            System.out.printf("Confirm to roll the dices [y/n] : \n");
                             answer = input.nextLine();
+                            while (!isYorN(answer)) {
+                                this.displayScoreBoard();
+                                theDiceBundle.printTheDices();
+                                System.out.printf("Please write 'y' for yes or 'n' for no ... : \n");
+                                answer = input.nextLine();
 
+                            }
                         }
                     } else { //if the user wrote 'stop' I force the nb to 3 to stop the game (a little ugly but it works)
                         nbLance = 3;
@@ -126,7 +145,7 @@ public class Game {
     public boolean isDiceSensitive(String numOfDices) { // A bit more complex, I want only an array of dices or the string "stop" or the empty sting ""
         try {
             String[] parts;
-            if (numOfDices.equals("stop") || numOfDices.isBlank()) { //if its a stop or an empty, we're good
+            if (numOfDices.equals("stop") || numOfDices.isBlank() || numOfDices.equals("admin")) { //if its a stop or an empty, we're good (or the admin command)
                 return true;
             } else {
                 parts = numOfDices.split(",");  // Else, I check if the int in the array are good split the string
@@ -137,6 +156,17 @@ public class Game {
                 }
                 return true;
             }
+        } catch (Exception e) {
+            return false; //In case this is not the type required
+        }
+    }
+
+    public boolean isAdminSensitive(String numOfDices) { // A bit more complex, I want only an array of dices or the string "stop" or the empty sting ""
+        try {
+            if (numOfDices.equals("c") || numOfDices.equals("d") || numOfDices.equals("end")) { //if its a stop or an empty, we're good (or the admin command)
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false; //In case this is not the type required
         }
@@ -164,8 +194,7 @@ public class Game {
     //////////////////////////////////// DISPLAY BOARD  ////////////////////////////////////////////
     ////////////////////////////////////                ////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    private void displayScoreBoard()
-    {
+    private void displayScoreBoard() {
         int cpt;
         int size;
 
@@ -174,16 +203,14 @@ public class Game {
         this.displayFirstLine();
         this.displayBorder(size);
         cpt = 1;
-        while (cpt <= 16)
-        {
+        while (cpt <= 16) {
             this.displayLine(cpt);
             this.displayBorder(size);
             ++cpt;
         }
     }
 
-    private int calculateSize()
-    {
+    private int calculateSize() {
         int nbOfPlayer;
         int cpt;
         int size;
@@ -191,8 +218,7 @@ public class Game {
         size = 0;
         nbOfPlayer = this.ScoreSheets.length;
         cpt = 0;
-        while (cpt < nbOfPlayer)
-        {
+        while (cpt < nbOfPlayer) {
             size += this.ScoreSheets[cpt].playerName.length();
             ++cpt;
         }
@@ -202,8 +228,7 @@ public class Game {
         return (size + 1);
     }
 
-    private void displayFirstLine()
-    {
+    private void displayFirstLine() {
         int nbOfPlayer;
         int cpt;
 
@@ -211,8 +236,7 @@ public class Game {
         nbOfPlayer = this.ScoreSheets.length;
         System.out.print("\t");
         System.out.print("|     choix     |");
-        while (cpt < nbOfPlayer)
-        {
+        while (cpt < nbOfPlayer) {
             System.out.print(" " + this.ScoreSheets[cpt].playerName
                     + " |");
             ++cpt;
@@ -220,18 +244,17 @@ public class Game {
         System.out.print("\n");
     }
 
-    private void displayLine(int num)
-    {
-        int cpt;
-        int nbOfPlayer;
+    private void displayLine(int num) {
+        if ((num < 7 || num > 8) && (num != 16)) {
+            if (num > 7)
+                System.out.print(num - 2 + "-" + "\t");
+            else
+                System.out.print(num + "-" + "\t");
+        } else
+            System.out.print("  \t");
 
-        cpt = 0;
-        nbOfPlayer = this.ScoreSheets.length;
-        System.out.print(num
-                            + "-"
-                            + "\t");
-        switch (num)
-        {
+
+        switch (num) {
             case 1:
                 System.out.print("|     "
                         + "ONES"
@@ -293,27 +316,27 @@ public class Game {
                 this.displayLineEnd(10);
                 break;
             case 11:
-                System.out.print("|   "
-                        + "FULL HOUSE"
-                        +"  |");
+                System.out.print("|     "
+                        + "CHANCE"
+                        + "    |");
                 this.displayLineEnd(11);
                 break;
             case 12:
-                System.out.print("|"
-                        + "SMALL STRAIGHT"
-                        + " |");
+                System.out.print("|   "
+                        + "FULL HOUSE"
+                        + "  |");
                 this.displayLineEnd(12);
                 break;
             case 13:
                 System.out.print("|"
-                        + "LARGE STRAIGHT"
+                        + "SMALL STRAIGHT"
                         + " |");
                 this.displayLineEnd(13);
                 break;
             case 14:
-                System.out.print("|     "
-                        + "CHANCE"
-                        + "    |");
+                System.out.print("|"
+                        + "LARGE STRAIGHT"
+                        + " |");
                 this.displayLineEnd(14);
                 break;
             case 15:
@@ -332,8 +355,7 @@ public class Game {
         System.out.print("\n");
     }
 
-    private void displayLineEnd(int state)
-    {
+    private void displayLineEnd(int state) {
         int cpt;
         int nbOfPlayer;
         int sizeName;
@@ -343,12 +365,10 @@ public class Game {
         cpt = 0;
         nbOfPlayer = this.ScoreSheets.length;
 
-        while (cpt < nbOfPlayer)
-        {
-            score  = this.ScoreSheets[cpt].cases[state];
+        while (cpt < nbOfPlayer) {
+            score = this.ScoreSheets[cpt].cases[state];
             sizeName = this.ScoreSheets[cpt].playerName.length() + 2;
-            if (score >= 100)
-            {
+            if (score >= 100) {
                 temp = sizeName - 3;
                 if (temp % 2 == 1)
                     System.out.print(" ".repeat(((temp / 2) + 1)));
@@ -357,9 +377,7 @@ public class Game {
                 System.out.print(score
                         + " ".repeat(temp / 2)
                         + "|");
-            }
-            else if (score >= 10)
-            {
+            } else if (score >= 10) {
                 temp = sizeName - 2;
                 if (temp % 2 == 1)
                     System.out.print(" ".repeat((temp / 2) + 1));
@@ -368,9 +386,7 @@ public class Game {
                 System.out.print(score
                         + " ".repeat(temp / 2)
                         + "|");
-            }
-            else
-            {
+            } else {
                 temp = sizeName - 1;
                 if (temp % 2 == 1)
                     System.out.print(" ".repeat((temp / 2) + 1));
@@ -389,14 +405,12 @@ public class Game {
         }
     }
 
-    private void displayBorder(int size)
-    {
+    private void displayBorder(int size) {
         int cpt;
 
         cpt = 0;
         System.out.print("\t");
-        while (cpt < size)
-        {
+        while (cpt < size) {
             System.out.print("-");
             ++cpt;
         }
