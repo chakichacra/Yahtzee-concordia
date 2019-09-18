@@ -1,6 +1,7 @@
+import java.io.FileWriter;
 import java.lang.reflect.AccessibleObject;
 import java.util.Scanner;
-import java.io.File;
+import java.io.PrintWriter;
 
 public class Game {
     ScoreSheet[] ScoreSheets;
@@ -28,6 +29,7 @@ public class Game {
             int total = ScoreSheets[player].cases[7] + ScoreSheets[player].cases[8] + ScoreSheets[player].cases[16];
             System.out.printf("Score du joueur : " + ScoreSheets[player].getPlayerName() + " is " + total); //Print the number of the round
         }
+        this.registerScoreBoard();
     }
 
     public void nextRound() {
@@ -422,23 +424,231 @@ public class Game {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void registerScoreBoard() {
-        File scoreSave = new File("Save.txt");
         int cpt;
         int size;
+        String scoreAppend = new String("");
+        FileWriter fileWriter;
+        PrintWriter printWriter;
 
-        if (scoreSave.createNewFile())
-            System.out.println("Save file created!");
-        scoreSave.setWritable(true);
 
+
+        fileWriter = null;
+        try {
+            fileWriter = new FileWriter("score_save.txt", true); //Set true for append mode
+        }
+        catch (Exception e) {
+            System.out.println("error");
+        }
+
+        printWriter = new PrintWriter(fileWriter);
         size = this.calculateSize();
-        this.displayBorder(size, );
-        this.displayFirstLine();
-        this.displayBorder(size);
+        scoreAppend = this.displayBorderF(size, scoreAppend);
+        scoreAppend = this.displayFirstLineF(scoreAppend);
+        scoreAppend = this.displayBorderF(size, scoreAppend);
         cpt = 1;
         while (cpt <= 16) {
-            this.displayLine(cpt);
-            this.displayBorder(size);
+            scoreAppend = this.displayLineF(cpt, scoreAppend);
+            scoreAppend = this.displayBorderF(size, scoreAppend);
             ++cpt;
         }
+
+        scoreAppend = scoreAppend.concat("\n\n\n");
+        printWriter.println(scoreAppend);  //New line
+        printWriter.close();
+    }
+
+
+    private String displayFirstLineF(String str) {
+        int nbOfPlayer;
+        int cpt;
+
+        cpt = 0;
+        nbOfPlayer = this.ScoreSheets.length;
+        str = str.concat("\t");
+        str = str.concat("|     choix     |");
+        while (cpt < nbOfPlayer) {
+            str = str.concat(" " + this.ScoreSheets[cpt].playerName
+                    + " |");
+            ++cpt;
+        }
+        str = str.concat("\n");
+
+        return (str);
+    }
+
+    private String displayLineF(int num, String str) {
+        if ((num < 7 || num > 8) && (num != 16)) {
+            if (num > 7)
+                str = str.concat("\t");
+            else
+                str = str.concat("\t");
+        } else
+            str = str.concat("\t");
+
+
+        switch (num) {
+            case 1:
+                str = str.concat("|     "
+                        + "ONES"
+                        + "      |");
+                str = this.displayLineEndF(1, str);
+                break;
+            case 2:
+                str = str.concat("|     "
+                        + "TWOS"
+                        + "      |");
+                str = this.displayLineEndF(2, str);
+                break;
+            case 3:
+                str = str.concat("|     "
+                        + "THREES"
+                        + "    |");
+                str = this.displayLineEndF(3, str);
+                break;
+            case 4:
+                str = str.concat("|     "
+                        + "FOURS"
+                        + "     |");
+                str = this.displayLineEndF(4, str);
+                break;
+            case 5:
+                str = str.concat("|     "
+                        + "FIVES"
+                        + "     |");
+                str = this.displayLineEndF(5, str);
+                break;
+            case 6:
+                str = str.concat("|     "
+                        + "SIXES"
+                        + "     |");
+                str = this.displayLineEndF(6, str);
+                break;
+            case 7:
+                str = str.concat("|     "
+                        + "SUM"
+                        + "       |");
+                str = this.displayLineEndF(7, str);
+                break;
+            case 8:
+                str = str.concat("|     "
+                        + "BONUS"
+                        + "     |");
+                str = this.displayLineEndF(8, str);
+                break;
+            case 9:
+                str = str.concat("|"
+                        + "THREE OF A KIND"
+                        + "|");
+                str = this.displayLineEndF(9, str);
+                break;
+            case 10:
+                str = str.concat("|"
+                        + "FOUR OF A KIND"
+                        + " |");
+                str = this.displayLineEndF(10, str);
+                break;
+            case 11:
+                str = str.concat("|     "
+                        + "CHANCE"
+                        + "    |");
+                str = this.displayLineEndF(11, str);
+                break;
+            case 12:
+                str = str.concat("|   "
+                        + "FULL HOUSE"
+                        + "  |");
+                str = this.displayLineEndF(12, str);
+                break;
+            case 13:
+                str = str.concat("|"
+                        + "SMALL STRAIGHT"
+                        + " |");
+                str = this.displayLineEndF(13, str);
+                break;
+            case 14:
+                str = str.concat("|"
+                        + "LARGE STRAIGHT"
+                        + " |");
+                str =  this.displayLineEndF(14, str);
+                break;
+            case 15:
+                str = str.concat("|     "
+                        + "YAHTZEE"
+                        + "   |");
+                str = this.displayLineEndF(15, str);
+                break;
+            case 16:
+                str = str.concat("|  "
+                        + "TOTAL_SCORE"
+                        + "  |");
+                str = this.displayLineEndF(16, str);
+                break;
+        }
+        str = str.concat("\n");
+        return (str);
+    }
+
+    private String displayLineEndF(int state, String str) {
+        int cpt;
+        int nbOfPlayer;
+        int sizeName;
+        int score;
+        int temp;
+
+        cpt = 0;
+        nbOfPlayer = this.ScoreSheets.length;
+
+        while (cpt < nbOfPlayer) {
+            score = this.ScoreSheets[cpt].cases[state];
+            sizeName = this.ScoreSheets[cpt].playerName.length() + 2;
+            if (score >= 100) {
+                temp = sizeName - 3;
+                if (temp % 2 == 1)
+                    str = str.concat(" ".repeat(((temp / 2) + 1)));
+                else
+                    str = str.concat(" ".repeat(temp / 2));
+                str = str.concat(score
+                        + " ".repeat(temp / 2)
+                        + "|");
+            } else if (score >= 10) {
+                temp = sizeName - 2;
+                if (temp % 2 == 1)
+                    str = str.concat(" ".repeat((temp / 2) + 1));
+                else
+                    str = str.concat(" ".repeat(temp / 2));
+                str = str.concat(score
+                        + " ".repeat(temp / 2)
+                        + "|");
+            } else {
+                temp = sizeName - 1;
+                if (temp % 2 == 1)
+                    str = str.concat(" ".repeat((temp / 2) + 1));
+                else
+                    str = str.concat(" ".repeat(temp / 2));
+                if (score == -1)
+                    str = str.concat("."
+                            + " ".repeat(temp / 2)
+                            + "|");
+                else
+                    str = str.concat(score
+                            + " ".repeat(temp / 2)
+                            + "|");
+            }
+            ++cpt;
+        }
+        return (str);
+    }
+
+    private String displayBorderF(int size, String str) {
+        int cpt;
+
+        cpt = 0;
+        str = str.concat("\t");
+        while (cpt < size) {
+            str = str.concat("-");
+            ++cpt;
+        }
+        str = str.concat("\n");
+        return (str);
     }
 }
