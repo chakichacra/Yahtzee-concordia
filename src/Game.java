@@ -17,6 +17,7 @@ public class Game {
             ScoreSheets[i - 1] = new ScoreSheet(name); //score sheet (player 1 at place [0])
         }
         theDiceBundle.resetTheDices();
+        this.displayScoreBoard();
     }
 
     public void start() {
@@ -158,4 +159,249 @@ public class Game {
     public int getNbRound() { // '-' who knows ...
         return nbRound;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////                ////////////////////////////////////////////
+    //////////////////////////////////// DISPLAY BOARD  ////////////////////////////////////////////
+    ////////////////////////////////////                ////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    private void displayScoreBoard()
+    {
+        int cpt;
+        int size;
+
+        size = this.calculateSize();
+        this.displayBorder(size);
+        this.displayFirstLine();
+        this.displayBorder(size);
+        cpt = 1;
+        while (cpt <= 16)
+        {
+            this.displayLine(cpt);
+            this.displayBorder(size);
+            ++cpt;
+        }
+    }
+
+    private int calculateSize()
+    {
+        int nbOfPlayer;
+        int cpt;
+        int size;
+
+        size = 0;
+        nbOfPlayer = this.ScoreSheets.length;
+        cpt = 0;
+        while (cpt < nbOfPlayer)
+        {
+            size += this.ScoreSheets[cpt].playerName.length();
+            ++cpt;
+        }
+        size += nbOfPlayer + 1;
+        size += nbOfPlayer * 2;
+        size += 15; //size of 'Three of a kind' largest option string
+        return (size + 1);
+    }
+
+    private void displayFirstLine()
+    {
+        int nbOfPlayer;
+        int cpt;
+
+        cpt = 0;
+        nbOfPlayer = this.ScoreSheets.length;
+        System.out.print("\t");
+        System.out.print("|     choix     |");
+        while (cpt < nbOfPlayer)
+        {
+            System.out.print(" " + this.ScoreSheets[cpt].playerName
+                    + " |");
+            ++cpt;
+        }
+        System.out.print("\n");
+    }
+
+    private void displayLine(int num)
+    {
+        int cpt;
+        int nbOfPlayer;
+
+        cpt = 0;
+        nbOfPlayer = this.ScoreSheets.length;
+        System.out.print("\t");
+        switch (num)
+        {
+            case 1:
+                System.out.print("|     "
+                        + "ONES"
+                        + "      |");
+                this.displayLineEnd(1);
+                break;
+            case 2:
+                System.out.print("|     "
+                        + "TWOS"
+                        + "      |");
+                this.displayLineEnd(2);
+                break;
+            case 3:
+                System.out.print("|     "
+                        + "THREES"
+                        + "    |");
+                this.displayLineEnd(3);
+                break;
+            case 4:
+                System.out.print("|     "
+                        + "FOURS"
+                        + "     |");
+                this.displayLineEnd(4);
+                break;
+            case 5:
+                System.out.print("|     "
+                        + "FIVES"
+                        + "     |");
+                this.displayLineEnd(5);
+                break;
+            case 6:
+                System.out.print("|     "
+                        + "SIXES"
+                        + "     |");
+                this.displayLineEnd(6);
+                break;
+            case 7:
+                System.out.print("|     "
+                        + "SUM"
+                        + "       |");
+                this.displayLineEnd(7);
+                break;
+            case 8:
+                System.out.print("|     "
+                        + "BONUS"
+                        + "     |");
+                this.displayLineEnd(8);
+                break;
+            case 9:
+                System.out.print("|"
+                        + "THREE OF A KIND"
+                        + "|");
+                this.displayLineEnd(9);
+                break;
+            case 10:
+                System.out.print("|"
+                        + "FOUR OF A KIND"
+                        + " |");
+                this.displayLineEnd(10);
+                break;
+            case 11:
+                System.out.print("|   "
+                        + "FULL HOUSE"
+                        +"  |");
+                this.displayLineEnd(11);
+                break;
+            case 12:
+                System.out.print("|"
+                        + "SMALL_STRAIGHT"
+                        + " |");
+                this.displayLineEnd(12);
+                break;
+            case 13:
+                System.out.print("|"
+                        + "LARGE_STRAIGHT"
+                        + " |");
+                this.displayLineEnd(13);
+                break;
+            case 14:
+                System.out.print("|     "
+                        + "CHANCE"
+                        + "    |");
+                this.displayLineEnd(14);
+                break;
+            case 15:
+                System.out.print("|     "
+                        + "YAHTZEE"
+                        + "   |");
+                this.displayLineEnd(15);
+                break;
+            case 16:
+                System.out.print("|  "
+                        + "TOTAL_SCORE"
+                        + "  |");
+                this.displayLineEnd(16);
+                break;
+        }
+        System.out.print("\n");
+    }
+
+    private void displayLineEnd(int state)
+    {
+        int cpt;
+        int nbOfPlayer;
+        int sizeName;
+        int score;
+        int temp;
+
+        cpt = 0;
+        nbOfPlayer = this.ScoreSheets.length;
+
+        while (cpt < nbOfPlayer)
+        {
+            score  = this.ScoreSheets[cpt].cases[state];
+            sizeName = this.ScoreSheets[cpt].playerName.length() + 2;
+            if (score >= 100)
+            {
+                temp = sizeName - 3;
+                if (temp % 2 == 1)
+                    System.out.print(" ".repeat(((temp / 2) + 1)));
+                else
+                    System.out.print(" ".repeat(temp / 2));
+                System.out.print(score
+                        + " ".repeat(temp / 2)
+                        + "|");
+            }
+            else if (score >= 10)
+            {
+                temp = sizeName - 2;
+                if (temp % 2 == 1)
+                    System.out.print(" ".repeat((temp / 2) + 1));
+                else
+                    System.out.print(" ".repeat(temp / 2));
+                System.out.print(score
+                        + " ".repeat(temp / 2)
+                        + "|");
+            }
+            else
+            {
+                temp = sizeName - 1;
+                if (temp % 2 == 1)
+                    System.out.print(" ".repeat((temp / 2) + 1));
+                else
+                    System.out.print(" ".repeat(temp / 2));
+                if (score == -1)
+                    System.out.print("."
+                            + " ".repeat(temp / 2)
+                            + "|");
+                else
+                    System.out.print(score
+                            + " ".repeat(temp / 2)
+                            + "|");
+            }
+            ++cpt;
+        }
+    }
+
+    private void displayBorder(int size)
+    {
+        int cpt;
+
+        cpt = 0;
+        System.out.print("\t");
+        while (cpt < size)
+        {
+            System.out.print("-");
+            ++cpt;
+        }
+        System.out.print("\n");
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////  END OF DISPLAY  /////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="83e3065e-ee12-4cdf-93f7-67b74f1414fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test@/DiceBundle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/DiceBundle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test@/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test@/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test@/ScoreSheet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/test@/ScoreSheet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiceBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiceBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/test@/Game.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScoreSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScoreSheet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +14,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectId" id="1QzPbnR1vaK6NJ1bYutn6hE4n86" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Game.java" />
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -51,6 +49,24 @@
     <configuration />
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="83e3065e-ee12-4cdf-93f7-67b74f1414fc" name="Default Changelist" comment="" />
+      <created>1568770528983</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568770528983</updated>
+    </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
