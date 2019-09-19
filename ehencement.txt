@@ -4,17 +4,78 @@ Theotime:
 
 Simon:
 	Make the function that check the input of the users and make sure that they
-	don't try to fuck around with some strange input.
+	don't try to do some strange input.
 
 Theo:
-	Write the diplay functions and the utility function.
+	Write the display functions and the utility function.
+
+
+			Actual Features
+
+Right now we have a proper implementation of the game. The program can support game that goes up to 5 players (for ergonomy).
+To do some test we added a admin command that people can use. Score are dynamicly calculated and the dice are
+checked to verify that the player can actually place a score in the wanted case. We are almost sure that
+all the possible error due to input are catched and we made the code as forgiving as possible by making
+some undo options. We've revisited the display of the scoreboard, now instead of:
+
+--- Affichage de la Score Sheet ---
+    1 :  .              7 : 3 of a kind :  .
+    2 :  .              8 : 4 of a kind :  .
+    3 :  .              9 :      Chance :  .
+    4 :  .             10 :  Full House :  .
+    5 :  .             11 :  S.Straight :  .
+    6 :  .             12 :  L.Straight :  .
+Total :  0             13 :     Yahtzee :  .
+Bonus :  .                        Total :  0
+
+Which coul only display one player at the time and is not easy to read.
+
+we now have something that can display the score of multiple players and that is much more easy to read.
+See below:
+
+	-----------------------------------------------------
+	|     choix     | Kamthan | Theotime | Theo | Simon |
+	-----------------------------------------------------
+1-	|     ONES      |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+2-	|     TWOS      |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+3-	|     THREES    |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+4-	|     FOURS     |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+5-	|     FIVES     |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+6-	|     SIXES     |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+  	|     SUM       |    0    |     0    |   0  |   0   |
+	-----------------------------------------------------
+  	|     BONUS     |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+7-	|THREE OF A KIND|    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+8-	|FOUR OF A KIND |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+9-	|     CHANCE    |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+10-	|   FULL HOUSE  |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+11-	|SMALL STRAIGHT |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+12-	|LARGE STRAIGHT |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+13-	|     YAHTZEE   |    .    |     .    |   .  |   .   |
+	-----------------------------------------------------
+  	|  TOTAL_SCORE  |    0    |     0    |   0  |   0   |
+	-----------------------------------------------------
+
 
 			Features that we want to add
 
-It would be nice to dramatically improve the display of the score and the design of evrything in general.
+It would be nice make the interface Graphical, we didn't knew how to do it and we did'nt had time 
+to learn.
 From a user point of view the design and what he sees might be the most important thing.
-First it would be nice to have a real scorebord with real border that will be generated dynamically.
-Same for the Dices would be much more user friendly to have a display of the Dice that look like this:
+For the Dices would be much more user friendly to have a display of the Dice that look like this:
 		-----
 		| 4 |
 		-----
@@ -23,5 +84,3 @@ Then we should implent a menu where you can start the game and change the parame
 first to rewrite some part of the code to make it more flexible, using variable and constant to define 
 things like the number of Dice, the number of round, ect.
 
-And then finally the user input should be perfectly secured. So we will need to have a bunch of function
-to check every input.

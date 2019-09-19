@@ -14,48 +14,6 @@ public class ScoreSheet {
         return playerName;
     }
 
-    public void View() {
-        this.updateTotals();
-        System.out.printf(" --- Affichage de la Score Sheet ---\n");
-        for (int i = 1; i < 9; i++) {
-            if (i < 7){
-                System.out.printf("%5d : %2s", i, this.scoreNull(i));
-            }else if (i==7){
-                System.out.printf("%2s : %2s", "Total", this.scoreNull(i));
-            }else if (i == 8){
-                System.out.printf("%2s : %2s", "Bonus", this.scoreNull(i));
-            }
-            switch (i) {
-                case 1: //3 of a kind
-                    System.out.printf("%15d : %11s : %2s", i + 6, "3 of a kind", this.scoreNull(i + 8));
-                    break;
-                case 2://4 of a kind
-                    System.out.printf("%15d : %11s : %2s", i + 6, "4 of a kind", this.scoreNull(i + 8));
-                    break;
-                case 3://Luck (sum of Dices)
-                    System.out.printf("%15d : %11s : %2s", i + 6, "Chance", this.scoreNull(i + 8));
-                    break;
-                case 4://Full House
-                    System.out.printf("%15d : %11s : %2s", i + 6, "Full House", this.scoreNull(i + 8));
-                    break;
-                case 5://Small Straight
-                    System.out.printf("%15d : %11s : %2s", i + 6, "S.Straight", this.scoreNull(i + 8));
-                    break;
-                case 6://Large Straight
-                    System.out.printf("%15d : %11s : %2s", i + 6, "L.Straight", this.scoreNull(i + 8));
-                    break;
-                case 7://Yahtzee
-                    System.out.printf("%15d : %11s : %2s", 13, "Yahtzee", this.scoreNull(i+8));
-                    break;
-                case 8 ://Total
-                    System.out.printf("%29s : %2s", "Total", this.scoreNull(i+8));
-                    break;
-            }
-            System.out.printf("\n");
-        }
-        System.out.printf("\n");
-    }
-
     public void updateTotals(){
         this.cases[7] = this.sumOfScoreBetween(1,6);
         if (this.cases[7] > 62)
